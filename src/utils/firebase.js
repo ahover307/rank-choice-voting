@@ -1,5 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {getAnalytics} from "firebase/analytics";
+import {getAuth} from "firebase/auth";
 
 // Initialize firebase integration
 export const initFirebase = () => {
@@ -21,6 +22,9 @@ export const initFirebase = () => {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    const auth = getAuth(app);
 
-    return [app, analytics];
+    console.log(auth);
+
+    return [app, analytics, auth];
 }

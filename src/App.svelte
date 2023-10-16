@@ -1,10 +1,25 @@
 <script>
+    import {onMount, tick} from "svelte";
     import { Router, Link, Route } from "svelte-routing";
-    import { initFirebase } from "./firebase";
+    import { initFirebase } from "./utils/firebase.js";
+
+    import Home from "./lib/pages/Home.svelte";
+    import Dashboard from "./lib/pages/Dashboard.svelte";
+    import About from "./lib/pages/About.svelte";
+    import TOS from "./lib/pages/TOS.svelte";
+    import Privacy from "./lib/pages/Privacy.svelte";
+
+    import { analytics, app, auth } from "./lib/stores.js";
 
     export const url = "";
+    onMount(() => {
+        console.log("Mounting in firebase");
+        const [temp_app, temp_analytics, temp_auth] = initFirebase();
 
-    const [app, analytics] = initFirebase();
+        app.update(() => temp_app);
+        analytics.update(() => temp_analytics);
+        auth.update(() => temp_auth);
+    })
 </script>
 
 <main>
